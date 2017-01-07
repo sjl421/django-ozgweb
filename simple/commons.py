@@ -202,7 +202,7 @@ def res_fail(res_code, desc, data = None):
 
 #计算总页数
 def page_count(count, page_size):
-	if(count % page_size == 0):
+	if count % page_size == 0:
 		return (count // page_size)
 	else:
 		return (count // page_size) + 1
