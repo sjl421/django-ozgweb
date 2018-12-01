@@ -1,3 +1,4 @@
 
 *.pyc
-static/simple/js/ckeditor/
+.DS_Store
+node_modules/
