@@ -4,7 +4,7 @@ import os, json, hashlib, platform, time
 import mgr.commons
 from .models import *
 
-def index_login(request):
+def login(request):
 	if request.method != 'POST':
 		return mgr.commons.res_fail(1, "请使用POST方式提交")
 	
@@ -47,23 +47,10 @@ def index_login(request):
 		user.save()
 		return mgr.commons.res_fail(1, "密码错误")
 
-def index_getvcode(request):
+def getvcode(request):
 	ca = mgr.commons.Captcha(request)
 	#ca.words = ['hello', 'world', 'helloworld']
 	ca.type = 'number' #or word
 	ca.img_width = 150
 	ca.img_height = 30
 	return ca.display()
-
-def other_server_info(request):
-	
-	data = {
-		"os": platform.system(),
-		"django_version": django.get_version(),
-		"python_version": platform.python_version(),
-		"web_path": os.path.dirname(os.path.dirname(__file__)),
-		"now": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())),
-	}
-	return mgr.commons.res_success("请求成功", data)
-	
-	

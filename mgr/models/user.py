@@ -29,7 +29,7 @@ class User(models.Model):
 		data_list_json = []
 		for data in data_list:		
 			item = json.loads(data.toJSON())
-			item["add_time"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(item["add_time"]))
+			item["add_time_s"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(item["add_time"]))
 			
 			#移除密码
 			del item["pwd"]

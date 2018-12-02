@@ -17,7 +17,7 @@ class UserShow_ extends React.Component {
 		}
 		
 		var that = this;
-		axios.get(cfg.web_server_root + "user/show?page=" + req_obj.page).then(function (response) {
+		axios.get(cfg.web_server_root + "user/show/?page=" + req_obj.page).then(function (response) {
             if(response.data.code === 0) {
                 that.setState({
                 	maindata: response.data.data.list,
@@ -51,7 +51,7 @@ class UserShow_ extends React.Component {
 			message.error("请选择要删除的用户");
 		}
 		else {
-			var url = cfg.web_server_root + "user/del?ids=";
+			var url = cfg.web_server_root + "user/del/?ids=";
 			for(var i = 0; i < that.state.selected_rows.length; i++) {
 				url += that.state.selected_rows[i].id;
 				if(i + 1 < that.state.selected_rows.length) {
@@ -88,7 +88,7 @@ class UserShow_ extends React.Component {
 	onDelete(id, event) {
 		
 		var that = this;
-        var url = cfg.web_server_root + "user/del?ids=" + id;
+        var url = cfg.web_server_root + "user/del/?ids=" + id;
 		
         axios.get(url).then(function (response) {
             if(response.data.code === 0) {
@@ -118,7 +118,7 @@ class UserShow_ extends React.Component {
 		
 		this.props.form.validateFields((err, values) => {
             if (!err) {
-                axios.post(cfg.web_server_root + "user/add", {
+                axios.post(cfg.web_server_root + "user/add/", {
                     name: values.name,
                     pwd: values.pwd
                 }).then(function (response) {					

@@ -27,7 +27,7 @@ export default class Dashboard extends React.Component {
 	
 	componentDidMount() {
 		var that = this;
-        axios.get(cfg.web_server_root + "other/server_info").then(function (response) {
+        axios.get(cfg.web_server_root + "other/server_info/").then(function (response) {
         	if(response.data.code === 0) {
             	that.setState({
             		server_info: response.data.data

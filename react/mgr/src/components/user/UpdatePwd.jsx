@@ -25,7 +25,7 @@ class UserUpdatePwd_ extends React.Component {
 
 		this.props.form.validateFields((err, values) => {
 			if (!err) {
-				axios.post(cfg.web_server_root + "user/updatepwd", {
+				axios.post(cfg.web_server_root + "user/updatepwd/", {
 					old_pwd: values.old_pwd,
 					pwd: values.pwd,
 					pwd2: values.pwd2

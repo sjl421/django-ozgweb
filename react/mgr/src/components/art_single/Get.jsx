@@ -29,7 +29,7 @@ export default class UserUpdatePwd extends React.Component {
 	onSubmit = () => {
 		var that = this;
 
-        axios.post(cfg.web_server_root + "art_single/update", {
+        axios.post(cfg.web_server_root + "art_single/update/", {
         	id: that.state.id,
             content: that.state.content
         }).then(function (response) {
@@ -47,7 +47,7 @@ export default class UserUpdatePwd extends React.Component {
 	
 	loadData() {
 		var that = this;
-		axios.get(cfg.web_server_root + "art_single/get?id=" + this.state.id).then(function (response) {					
+		axios.get(cfg.web_server_root + "art_single/get/?id=" + this.state.id).then(function (response) {					
 			if(response.data.code === 0) {
                 that.setState({
                 	id: response.data.data.id,

@@ -1,16 +1,21 @@
-﻿运行环境为Python3.4
+﻿运行环境为Python3
 
 
-需要先安装pillow：pip install pillow
+
+###部署步骤
+	
+	1.使用react的后台，cd到thinkphp-ozgweb/react/mgr，然后npm i && ./build.sh，修改前端的路径在react/mgr/src/common.js
+	
+
+	2.需要先安装pillow：pip3 install pillow
+	
+	
+	3.执行python3 manage.py runserver
+	
+
+==========
+
+入口：/static/mgr/index.html#/login
 
 
-ckeditor需要自行下载，对应目录django-ozgweb/static/simple/js/ckeditor
-
-
-直接运行python manage.py runserver
-
-
-后台入口：http://localhost:8000/simple/admin/index
-
-
-后台用户密码都是admin，Django's auth system用户名为admin、邮箱为ouzhigangGBA@gmail.com、密码为admin。暂无前台。
+用户密码都是admin。

@@ -16,7 +16,7 @@ class DataClassShow_ extends React.Component {
 
 		var that = this;
 		var type = parseInt(func.get_rest_param("type"));
-		axios.get(cfg.web_server_root + "data_class/show?type=" + type).then(function (response) {
+		axios.get(cfg.web_server_root + "data_class/show/?type=" + type).then(function (response) {
 			if(response.data.code === 0) {
 				that.setState({
 					maindata: response.data.data
@@ -38,7 +38,7 @@ class DataClassShow_ extends React.Component {
 			return;
 		}
 			
-		axios.get(cfg.web_server_root + "data_class/show?type=" + that.state.type).then(function (response) {
+		axios.get(cfg.web_server_root + "data_class/show/?type=" + that.state.type).then(function (response) {
 			if(response.data.code === 0) {
 				that.setState({
 					data_class_data: that.renderDropdownNodes(response.data.data),
@@ -83,7 +83,7 @@ class DataClassShow_ extends React.Component {
 	onEditBtnClick(edit_data, event) {
 		var that = this;
 		if(edit_data.parent_id != 0) {
-			axios.get(cfg.web_server_root + "data_class/get?id=" + edit_data.parent_id).then(function (response) {
+			axios.get(cfg.web_server_root + "data_class/get/?id=" + edit_data.parent_id).then(function (response) {
 				if(response.data.code === 0) {
 					that.setState({
 						is_add_visible: true,
@@ -126,7 +126,7 @@ class DataClassShow_ extends React.Component {
 	}
 	onDeleteBtnClick(id, event) {
 		var that = this;
-        var url = cfg.web_server_root + "data_class/del?id=" + id;
+        var url = cfg.web_server_root + "data_class/del/?id=" + id;
 		
         axios.get(url).then(function (response) {
             if(response.data.code === 0) {
@@ -156,7 +156,7 @@ class DataClassShow_ extends React.Component {
 					post_data.id = that.state.edit_data.id;
 				}
 				
-                axios.post(cfg.web_server_root + "data_class/add", post_data).then(function (response) {					
+                axios.post(cfg.web_server_root + "data_class/add/", post_data).then(function (response) {					
 					if(response.data.code === 0) {    
                     
 						that.resetAddForm();

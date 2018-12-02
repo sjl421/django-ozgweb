@@ -21,7 +21,7 @@ class DataShow_ extends React.Component {
 		}
 		
 		var that = this;
-		var url = cfg.web_server_root + "data/show?type=" + that.state.type + "&page=" + req_obj.page;
+		var url = cfg.web_server_root + "data/show/?type=" + that.state.type + "&page=" + req_obj.page;
 		
 		if(that.state.k_name != "" && !req_obj.k_name) { req_obj.k_name = that.state.k_name; }
 		if(req_obj.k_name && req_obj.k_name != "") { url += "&k_name=" + encodeURI(req_obj.k_name); }
@@ -55,7 +55,7 @@ class DataShow_ extends React.Component {
 			return;
 		}
 			
-		axios.get(cfg.web_server_root + "data_class/show?type=" + that.state.type).then(function (response) {
+		axios.get(cfg.web_server_root + "data_class/show/?type=" + that.state.type).then(function (response) {
 			if(response.data.code === 0) {
 				that.setState({
 					data_class_data: that.renderDropdownNodes(response.data.data),
@@ -112,7 +112,7 @@ class DataShow_ extends React.Component {
 			message.error("请选择要删除的" + this.state.type_name);
 		}
 		else {
-			var url = cfg.web_server_root + "data/del?ids=";
+			var url = cfg.web_server_root + "data/del/?ids=";
 			for(var i = 0; i < that.state.selected_rows.length; i++) {
 				url += that.state.selected_rows[i].id;
 				if(i + 1 < that.state.selected_rows.length) {
@@ -149,7 +149,7 @@ class DataShow_ extends React.Component {
 	onDelete(id, event) {
 		
 		var that = this;
-        var url = cfg.web_server_root + "data/del?ids=" + id;
+        var url = cfg.web_server_root + "data/del/?ids=" + id;
 		
         axios.get(url).then(function (response) {
             if(response.data.code === 0) {
@@ -221,7 +221,7 @@ class DataShow_ extends React.Component {
 			}
 		}
 		
-		axios.get(cfg.web_server_root + "data_class/get?id=" + edit_data.data_class_id).then(function (response) {
+		axios.get(cfg.web_server_root + "data_class/get/?id=" + edit_data.data_class_id).then(function (response) {
 			if(response.data.code === 0) {
 				that.setState({					
 					data_class_selected_text: response.data.data.name,
@@ -277,7 +277,7 @@ class DataShow_ extends React.Component {
 					post_data.id = that.state.edit_data.id;
 				}
 				
-                axios.post(cfg.web_server_root + "data/add", post_data).then(function (response) {					
+                axios.post(cfg.web_server_root + "data/add/", post_data).then(function (response) {					
 					if(response.data.code === 0) {
                         
 						that.resetAddForm();
@@ -517,7 +517,7 @@ class DataShow_ extends React.Component {
 		
 		//=================================================================
 		const upload_props = {
-			action: cfg.web_server_root + "data/upload",
+			action: cfg.web_server_root + "data/upload/",
 			fileList: that.state.upload_file_list,
 			onChange({ file, fileList }) {
 				for(var item of fileList) {
