@@ -1,6 +1,6 @@
 
 from django.urls import path
-import mgr.views_index, mgr.views_other, mgr.views_user, mgr.views_art_single
+import mgr.views_index, mgr.views_other, mgr.views_user, mgr.views_art_single, mgr.views_data, mgr.views_data_class
 
 app_name = 'mgr'
 
@@ -23,5 +23,10 @@ urlpatterns = [
 	path('data/show/', mgr.views_data.show),
 	path('data/get/', mgr.views_data.get),
 	path('data/add/', mgr.views_data.add),
-	path('data/datadel/', mgr.views_data.datadel),
+	path('data/del/', mgr.views_data.datadel),
+	path('data/upload/', mgr.views_data.upload),
+	path('data_class/show/', mgr.views_data_class.show),
+	path('data_class/get/', mgr.views_data_class.get),
+	path('data_class/add/', mgr.views_data_class.add),
+	path('data_class/del/', mgr.views_data_class.data_class_del),
 ]

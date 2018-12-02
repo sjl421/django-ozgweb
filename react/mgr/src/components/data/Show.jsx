@@ -203,37 +203,42 @@ class DataShow_ extends React.Component {
 		
 		that.setState({
 			content: edit_data.content,
-			is_index_show: edit_data.is_index_show == "1" ? true : false,
-			recommend: edit_data.recommend == "1" ? true : false,
-			is_index_top: edit_data.is_index_top == "1" ? true : false,
+			is_index_show: edit_data.is_index_show,
+			recommend: edit_data.recommend,
+			is_index_top: edit_data.is_index_top,
 			upload_file_list: upload_file_list
 		});
 		
 		//console.log(edit_data);
 		//console.log(edit_data.is_index_show);
 		//console.log(that.state.is_index_show);
-		for(var item of document.getElementsByTagName("input")) {
-			if(item.getAttribute("name") == "is_index_show" || item.getAttribute("name") == "recommend" || item.getAttribute("name") == "is_index_top") {
-				//console.log(edit_data[item.getAttribute("name")]);
-				if(edit_data[item.getAttribute("name")] == 1) {
-					item.click();
+		//setTimeout是为了解决第1次加载时找不到对象的问题
+		setTimeout(function() {
+			for(var item of document.getElementsByTagName("input")) {
+				if(item.getAttribute("name") == "is_index_show" || item.getAttribute("name") == "recommend" || item.getAttribute("name") == "is_index_top") {
+					//console.log(edit_data[item.getAttribute("name")]);
+					if(edit_data[item.getAttribute("name")]) {
+						item.click();
+					}
 				}
 			}
-		}
+		}, 50);
 		
-		axios.get(cfg.web_server_root + "data_class/get/?id=" + edit_data.data_class_id).then(function (response) {
-			if(response.data.code === 0) {
-				that.setState({					
-					data_class_selected_text: response.data.data.name,
-					data_class_selected_id: response.data.data.id,
-				});
-			}
-			else {
-				message.error(response.data.msg);
-			}
-		}).catch(function (error) {
-			message.error(error);
-		});
+		if(edit_data.type == 1) {
+			axios.get(cfg.web_server_root + "data_class/get/?id=" + edit_data.data_class_id).then(function (response) {
+				if(response.data.code === 0) {
+					that.setState({					
+						data_class_selected_text: response.data.data.name,
+						data_class_selected_id: response.data.data.id,
+					});
+				}
+				else {
+					message.error(response.data.msg);
+				}
+			}).catch(function (error) {
+				message.error(error);
+			});
+		}
 	}
 	
 	onAddSubmit(event) {
@@ -572,7 +577,7 @@ class DataShow_ extends React.Component {
 													<InputNumber placeholder="请输入排序" min={0} value="0" />
 												)}
 											</Form.Item>
-											<Form.Item style={ { margin: '0', marginTop: '10px' } } label={ this.state.type_name + '图片' }>
+											<Form.Item style={ { margin: '0', marginTop: '10px', display: this.state.type !== 2 ? 'block' : 'none' } } label={ this.state.type_name + '图片' }>
 												<Upload {...upload_props}>
 													<Button>
 														<Icon type="upload" /> 上传

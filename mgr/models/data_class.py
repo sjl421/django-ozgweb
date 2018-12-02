@@ -1,4 +1,5 @@
 from django.db import models
+from django.db import connection
 import json, time
 from .commons import *
 
@@ -26,17 +27,20 @@ class DataClass(models.Model):
 				DataClass.deleteById(dc.id)
 		
 			#删除该分类下面的对应数据
-			Data.objects.filter(dataclass_id = dc.id).delete()
+			cursor = connection.cursor()
+			cursor.execute("delete from " + table_prefix + "data where data_class_id = " + str(dc.id))
+			cursor.close()
+			
 			dc.delete()
 			
 	#递归获取父分类的dict，静态方法
 	@staticmethod
 	def getById(id):
-		dataclass = DataClass.objects.get(id = id)
-		dataclass_json = json.loads(dataclass.toJSON())	
-		if dataclass_json["parent_id"] != 0:
-			dataclass_json["parent"] = DataClass.getById(dataclass_json["parent_id"])	
-		return dataclass_json
+		data_class = DataClass.objects.get(id = id)
+		data_class_json = json.loads(data_class.toJSON())	
+		if data_class_json["parent_id"] != 0:
+			data_class_json["parent"] = DataClass.getById(data_class_json["parent_id"])	
+		return data_class_json
 		
 	#递归获取该分类下的分类(返回list)，静态方法
 	@staticmethod
