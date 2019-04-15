@@ -1,10 +1,8 @@
-﻿运行环境为Python3
-
-
+﻿
 
 ###部署步骤
 	
-	1.使用react的后台，cd到thinkphp-ozgweb/react/mgr，然后npm i && ./build.sh，修改前端的路径在react/mgr/src/common.js
+	1.使用react的后台，cd到django-ozgweb/react/mgr，然后npm i && ./build.sh，修改前端的路径在react/mgr/src/common.js
 	
 
 	2.需要先安装pillow：pip3 install pillow

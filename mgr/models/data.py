@@ -1,7 +1,7 @@
 from django.db import models
 import json, time
 from .commons import *
-from .data_class import DataClass
+from .data_cat import DataCat
 
 class Data(models.Model):
 	id = models.AutoField(primary_key = True)
@@ -9,8 +9,8 @@ class Data(models.Model):
 	content = models.TextField()
 	
 	#on_delete是必须参数，对应的外键就不需要了，外键的命名规则是关联类的小写加上_id，默认情况下关联到关联类的主键，to_field可修改关联类的字段
-	data_class = models.ForeignKey(DataClass, null = True, on_delete = models.CASCADE)	
-	#data_class_id = models.IntegerField(default = 0)
+	data_cat = models.ForeignKey(DataCat, null = True, on_delete = models.CASCADE)	
+	#data_cat_id = models.IntegerField(default = 0)
 	sort = models.IntegerField(default = 0)
 	type = models.IntegerField(default = 0)	
 	hits = models.IntegerField(default = 0)
@@ -43,10 +43,10 @@ class Data(models.Model):
 			item["add_time_s"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(item["add_time"]))
 			item["picture"] = json.loads(item["picture"])
 			
-			if item["data_class"]["id"] == 0:
+			if item["data_cat"]["id"] == 0:
 				item["dc_name"] = "[无分类]"
 			else:
-				item["dc_name"] = i.data_class.name
+				item["dc_name"] = i.data_cat.name
 			data.append(item)
 	
 		data = {

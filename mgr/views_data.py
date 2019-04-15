@@ -20,8 +20,8 @@ def show(request):
 	if request.GET.get("k_name"):
 		wq["name__contains"] = request.GET.get("k_name")
 	
-	if request.GET.get("k_data_class_id"):
-		wq["data_class_id"] = int(request.GET.get("k_data_class_id"))
+	if request.GET.get("k_data_cat_id"):
+		wq["data_cat_id"] = int(request.GET.get("k_data_cat_id"))
 	
 	res_data = Data.getList(page, page_size, wq)
 	return mgr.commons.res_success("请求成功", res_data)
@@ -64,7 +64,7 @@ def add(request):
 	
 	data.name = post_data["name"]
 	data.content = post_data["content"]	
-	data.data_class_id = post_data["data_class_id"] if "data_class_id" in post_data else 0
+	data.data_cat_id = post_data["data_cat_id"] if "data_cat_id" in post_data else 0
 	data.sort = post_data["sort"]
 	data.type = post_data["type"]
 	data.is_index_show = post_data["is_index_show"] if "is_index_show" in post_data else 0
